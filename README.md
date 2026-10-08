@@ -1,138 +1,83 @@
-# BlindSpot
+BlindSpot
+<p align=“center”>
 
-<p align="center">
-  <img src="UI/Asset/Logo.png" alt="BlindSpot" width="256">
+<img src=“UI/Asset/Logo.png” alt=“BlindSpot” width=“256”>
+
 </p>
 
-**ناحیهٔ امن برای مانیتور آسیب‌دیده — A safe zone for a damaged monitor**
+ناحیهٔ امن برای مانیتورهای آسیب‌دیده — A safe zone for a damaged monitor
 
-<div dir="rtl">
+<div dir=“rtl”>
 
-وقتی یه نوار از صفحهٔ مانیتورت سوخته باشه (مثلاً ۱۶۰ پیکسل از لبهٔ چپ دیگه نور
-نمی‌ده)، ویندوز همچنان برنامه‌ها و آیکون‌ها رو اونجا می‌چینه. BlindSpot اون نوار
-رو می‌گیره و می‌گه «اینجا تعلق به کسی نداره».
+وقتی بخشی از مانیتورت سوخته یا پیکسل‌هایش مرده باشد (مثلاً ۱۶۰ پیکسل از لبهٔ چپ دیگر نور نمی‌دهد)، ویندوز همچنان به روال عادی خود ادامه می‌دهد و پنجره‌ها و آیکون‌ها را در آن قسمتِ معیوب قرار می‌دهد. BlindSpot این نوار آسیب‌دیده را «تصاحب» می‌کند و به ویندوز می‌فهماند که این محدوده دیگر قابل‌استفاده نیست.
 
-## چه می‌کنه؟
+ویژگی‌ها
+۱. ایجاد نوار سیاه + رزرو فضا: نوار آسیب‌دیده را سیاه کرده و با استفاده از APIهای مخفیِ AppBar، به ویندوز اعلام می‌کند که این فضا رزرو شده است. در نتیجه آیکون‌های دسکتاپ، تسک‌بار و پنجره‌های Maximize شده به‌صورت خودکار در سمت راستِ این نوار قرار می‌گیرند.
 
-۱. **نوار سیاه + رزرو فضا** — نوار آسیب‌دیده رو سیاه می‌کنه و با API مخفیِ AppBar به
-ویندوز می‌قبونونده که اون نوار دیگه وجود نداره. آیکون‌های دسکتاپ، تسک‌بار و پنجره‌های
-به‌حداکثر‌رسیده خودشون رو سمتِ راستِ نوار چیده می‌کنن. (این همون مکانیزمیه که
-DesktopCoral استفاده می‌کرد.)
+۲. تغییر موقعیت (Clamping) پنجره‌ها: هر پنجره‌ای که در محدودهٔ آسیب‌دیده قرار بگیرد، به‌صورت خودکار به «ناحیهٔ امن» منتقل (Clamp) می‌شود. بازی‌های Borderless-fullscreen هم به همین صورت مدیریت می‌شوند. یک میان‌بر Ctrl+Alt+P برای توقف موقت برنامه در نظر گرفته شده است (مثلاً برای مواقعی که بازی‌ها در جابجایی دچار مشکل می‌شوند).
 
-۲. **هل دادن پنجره‌ها** — هر پنجره‌ای که سرِ نوار قرار بگیره به ناحیهٔ امن هل داده
-می‌شه. بازی‌های Borderless-fullscreen هم درست کلایمپ می‌شن. یه میان‌بر Ctrl+Alt+P هم
-وجود داره برای توقف موقت (مثلاً وقتی یه بازی به‌درستی جابجا نمی‌شه).
+۳. قفل رزولوشن برای بازی‌های Fullscreen: بازی‌های Exclusive-fullscreen توسط برنامه‌های User-mode قابل جابجایی نیستند. BlindSpot در این حالت رزولوشن را تغییر می‌دهد (مثلاً ۱۶۰۰x۹۰۰) و آن را در مرکز صفحه قرار می‌دهد تا نوار سیاه در سمت چپ باقی بماند. پس از بستن بازی، رزولوشن اصلی سیستم بازیابی می‌شود.
 
-۳. **قفل رزولوشن برای بازی‌های Fullscreen حقیقی** — بازی‌های exclusive-fullscreen از
-دستِ هیچ برنامهٔ کاربری کاری نمی‌شن. BlindSpot رزولوشن رو کم می‌کنه (مثلاً
-۱۶۰۰x۹۰۰) و وسط صفحه مرکز می‌کنه، تا نوار چپ سیاه بمونه. بعد از بازی، رزولوشن اصلی
-بازیابی می‌شه.
+نصب و اجرا
+بدون نیاز به نصب. کافیست فایل BlindSpot.exe را از بخش Releases دانلود و اجرا کنید. برنامه در System Tray قرار گرفته و در پس‌زمینه فعالیت می‌کند.
 
-## نصب
+روش استفاده
+۱. روی آیکون BlindSpot در Tray راست‌کلیک کنید.
 
-**نیازی به نصب نیست.** فایل `BlindSpot.exe` رو از [Releases](../../releases) دانلود
-کن و اجرا کن. برنامه خودش رو توی system tray قرار می‌ده و از اونجا کار می‌کنه.
+۲. گزینهٔ «Draw zone with mouse…» را انتخاب کرده و با ماوس محدودهٔ آسیب‌دیده را مستطیل بکشید (یا از «Safe zone settings…» مختصات دقیق پیکسل‌ها را وارد کنید).
 
-## استفاده
+۳. از این لحظه، ویندوز فضای رزرو شده را نادیده می‌گیرد.
 
-۱. روی آیکون BlindSpot توی tray راست‌کلیک کن.
-۲. **«رسم ناحیه با ماوس...»** رو بزن و مستطیکی روی نوار آسیب‌دیده بکش. (یا
-**«تنظیمات ناحیهٔ امن...»** و وارد کردن پیکسل.)
-۳. از این به بعد ویندوز از اون نوار دوری می‌کنه.
+تغییر زبان: از منوی راست‌کلیک، گزینهٔ «Language» را برای تغییر بین فارسی و انگلیسی انتخاب کنید.
+نکته: اگر بازی‌ها به‌درستی جابجا نمی‌شوند، برنامه را با دسترسی Administrator اجرا کنید.
+محدودیت‌ها
+Exclusive-fullscreen: به‌دلیل محدودیت‌های سیستم‌عامل، تنها راهکار در بازی‌های Fullscreen استفاده از قفل رزولوشن است. توصیه می‌شود در بازی‌ها از حالت Borderless استفاده کنید.
+چند مانیتوری: این ابزار در حال حاضر فقط مانیتور اصلی (Primary) را مدیریت می‌کند.
+DPI: برنامه با PerMonitorV2 سازگار است، اما در سیستم‌های با تنظیمات DPI غیرمتعارف، ممکن است نوارها به‌درستی تراز نشوند.
+زیرِ کاپوت (جزئیات فنی)
 
-**زبان:** از منوی راست‌کلیک، «زبان: English» رو بزن تا انگلیسی/فارسی переключ بشه.
-
-**توقف موقت:** Ctrl+Alt+P (مثلاً وقتی یه بازی گیر می‌کنه).
-
-## note
-
-اگه یه بازی به‌درستی هل داده نمی‌شه، BlindSpot رو به‌صورت مدیر (Administrator) اجرا
-کن. برنامه آیکونش رو توی tray می‌ذاره و خودش رو مخفی می‌کنه — هیچ پنجره‌ای باز
-نمی‌مونه.
-
-## محدودیت‌ها
-
-- **Exclusive-fullscreen واقعی:** دسترسیِ user-mode بهش وجود نداره؛ به‌جاش از قفل
-  رزولوشن استفاده می‌شه. توی بازی، رزولوشن رو همون مقدار قفل‌شده بذار (یا حالت
-  Borderless انتخاب کن).
-- **چند مانیتور:** فقط مانیتور اصلی (PrimaryScreen) رو می‌گیره. ترکیب‌کردن با
-  مانیتور سالم نیاز به کارِ بیشتر داره.
-- ** DPI:** روی PerMonitorV2 کار می‌کنه. اگه سیستم جیزیزن، آیکون و نوار هم‌تراز
-  نمی‌شن.
-
-## تحت‌الرقابة (for nerds)
-
-| فایل | کار |
-|---|---|
-| `Core/AppBarBand.cs` | ثبت نوار به‌عنوان AppBar با `SHAppBarMessage` — هم پوشش سیاه، هم رزرو فضا، تو یه پنجره |
-| `Core/WindowClamper.cs` | اسکن EnumWindows و هل دادن پنجره‌ها؛ timeout برای جلوگیری از تقلا |
-| `Core/ResolutionManager.cs` | enumerate modes، انتخاب، مرکزسازی با `DMDFO_CENTER` |
-| `Core/ZoneMath.cs` | هندسهٔ حاشیه‌ها + clamp (حداکثر ۴۸۰px) |
-| `Core/Lang.cs` | دیکشنری دوزبانهٔ fa/en |
-| `UI/TrayForm.cs` | tray، منو، مدیریت همه subsystemها |
-
-پروژه با .NET 8 WinForms ساخته شده. `dotnet build -c Release` برای بیلد معمولی،
-`publish.ps1` برای خروجیِ تک‌فایل.
+فایل	وظیفه
+Core/AppBarBand.cs	ثبت نوار به‌عنوان AppBar با استفاده از SHAppBarMessage برای رزرو فضا
+Core/WindowClamper.cs	اسکن پنجره‌ها (EnumWindows) و انتقال آن‌ها به محدودهٔ امن
+Core/ResolutionManager.cs	مدیریت لیست رزولوشن‌ها و تغییر حالت صفحه با DMDFO_CENTER
+Core/ZoneMath.cs	محاسبات حاشیه‌ها و محدودسازی (حداکثر ۴۸۰ پیکسل)
+UI/TrayForm.cs	مدیریت Tray، منوها و هماهنگی زیرسیستم‌ها
+پروژه با .NET 8 WinForms توسعه یافته است. از dotnet build -c Release برای بیلد معمولی و publish.ps1 برای خروجی تک‌فایل استفاده کنید.
 
 </div>
 
----
+<div dir=“ltr”>
 
-<div dir="ltr">
+When a strip of your monitor is dead (say the leftmost 160px no longer lights up), Windows still places icons and windows there. BlindSpot claims that strip and says “this area belongs to nobody”.
 
-When a strip of your monitor is dead (say the leftmost 160px no longer lights up),
-Windows still places icons and windows there. BlindSpot claims that strip and says
-"this area belongs to nobody".
+What it does
+Black band + space reservation — blackens the damaged strip and, through the undocumented AppBar API, convinces Windows that the strip does not exist. Desktop icons, the taskbar and maximized windows arrange themselves to the right of it.
 
-## What it does
+Window pushing — any window sitting on the strip gets nudged into the safe zone. Borderless-fullscreen games clamp correctly too. A Ctrl+Alt+P hotkey pauses it (e.g. when a game misbehaves).
 
-1. **Black band + space reservation** — blackens the damaged strip and, through the
-   undocumented AppBar API, convinces Windows that the strip does not exist. Desktop
-   icons, the taskbar and maximised windows arrange themselves to the right of it.
-   (Same mechanism DesktopCoral used.)
+Resolution lock for true fullscreen games — exclusive-fullscreen games cannot be moved by any user-mode program. BlindSpot lowers the resolution (e.g. 1600x900) and centers it, so the left band stays black. Original resolution is restored afterwards.
 
-2. **Window pushing** — any window sitting on the strip gets nudged into the safe
-   zone. Borderless-fullscreen games clamp correctly too. A Ctrl+Alt+P hotkey pauses
-   it (e.g. when a game misbehaves).
+Install
+No install required. Download BlindSpot.exe from Releases and run it. It lives in the system tray.
 
-3. **Resolution lock for true fullscreen games** — exclusive-fullscreen games cannot
-   be moved by any user-mode program. BlindSpot lowers the resolution (e.g.
-   1600x900) and centres it, so the left band stays black. Original resolution is
-   restored afterwards.
+Usage
+Right-click the BlindSpot tray icon.
+Pick “Draw zone with mouse…” and drag a rectangle over the damaged strip (or use “Safe zone settings…” to input exact pixels).
+Windows avoids that strip from now on.
+Language: Switch between English/Persian via the tray menu.
+Note: If a game is not pushed correctly, run BlindSpot as Administrator.
+Limitations
+Exclusive-fullscreen: True exclusive-fullscreen is unreachable from user mode; the resolution lock is the workaround. Borderless mode is recommended.
+Multiple monitors: Only the primary screen is handled.
+DPI: Works under PerMonitorV2.
+Under the hood
 
-## Install
-
-**No install required.** Download `BlindSpot.exe` from
-[Releases](../../releases) and run it. It lives in the system tray.
-
-## Usage
-
-1. Right-click the BlindSpot tray icon.
-2. Pick **"Draw zone with mouse..."** and drag a rectangle over the damaged strip.
-   (Or **"Safe zone settings..."** to type pixels.)
-3. Windows avoids that strip from now on.
-
-**Language:** from the right-click menu, click "Language: فارسی" to toggle
-English/Persian.
-
-**Pause:** Ctrl+Alt+P (e.g. when a game gets stuck).
-
-## Note
-
-If a game is not pushed correctly, run BlindSpot as Administrator. The app puts its
-icon in the tray and hides itself — no window stays open.
-
-## Limitations
-
-- **True exclusive-fullscreen** is unreachable from user mode; the resolution lock is
-  the workaround. Set the in-game resolution to the locked value (or pick Borderless).
-- **Multiple monitors:** only the primary screen is handled.
-- **DPI:** works under PerMonitorV2. On a misconfigured system the icon and band may
-  not align.
-
-## Building
-
-Requires .NET 8 SDK. `dotnet build -c Release` for a normal build; `publish.ps1`
-for a single-file self-contained exe (no .NET install needed on the target machine).
+File	Responsibility
+Core/AppBarBand.cs	Registering the band as an AppBar via SHAppBarMessage
+Core/WindowClamper.cs	Scanning EnumWindows and nudging windows into the safe zone
+Core/ResolutionManager.cs	Enumerating modes and centering with DMDFO_CENTER
+Core/ZoneMath.cs	Geometry calculations and clamping logic
+UI/TrayForm.cs	Tray management, menus, and subsystem orchestration
+Built with .NET 8 WinForms. Use dotnet build -c Release for normal builds or publish.ps1 for a single-file executable.
 
 </div>
