@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>BlindSpot</AssemblyName>
+    <RootNamespace>BlindSpot</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>UI\Asset\Tray_icon.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Tray art: the PNG is embedded so the app is a single file with no loose
+         assets to lose. Sizes 16..256 are pre-rendered in Tray_icon.ico for the
+         executable's own icon. -->
+    <EmbeddedResource Include="UI\Asset\Tray_icon.png" />
+    <None Include="UI\Asset\Tray_icon.png" Pack="true" PackagePath="assets" />
+    <None Include="UI\Asset\Logo.png" Pack="true" PackagePath="assets" />
+  </ItemGroup>
+
+</Project>

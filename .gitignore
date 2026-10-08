@@ -1,0 +1,15 @@
+# Build output
+bin/
+obj/
+
+# Publish artefact (built by publish.ps1, not committed)
+bin/publish/
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+
+# Local test scratch (used during development, not part of the app)
+test/
