@@ -244,6 +244,8 @@ namespace BlindSpot.UI
                 MessageBox.Show(this, err, Lang.T("res_restore_title"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
             _config.OriginalWidth = 0;
             _config.OriginalHeight = 0;
+            _config.OriginalFrequency = 0;
+            _config.OriginalBitsPerPixel = 0;
             _config.LockedWidth = 0;
             _config.LockedHeight = 0;
             _config.Save();

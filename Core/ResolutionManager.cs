@@ -133,7 +133,7 @@ namespace BlindSpot.Core
             dm.dmPelsWidth = mode.Width;
             dm.dmPelsHeight = mode.Height;
             dm.dmDisplayFrequency = mode.Frequency;
-            dm.dmBitsPerPel = 32;
+            dm.dmBitsPerPel = mode.BitsPerPixel > 0 ? mode.BitsPerPixel : 32;
             dm.dmDisplayFixedOutput = Win32.DMDFO_CENTER;   // <- no stretch, black bars
 
             int ret = Win32.ChangeDisplaySettingsEx(_deviceName, ref dm, IntPtr.Zero,
@@ -160,14 +160,16 @@ namespace BlindSpot.Core
             dm.dmPelsWidth = config.OriginalWidth;
             dm.dmPelsHeight = config.OriginalHeight;
             dm.dmDisplayFrequency = config.OriginalFrequency > 0 ? config.OriginalFrequency : 60;
-            dm.dmBitsPerPel = 32;
+            dm.dmBitsPerPel = config.OriginalBitsPerPixel > 0 ? config.OriginalBitsPerPixel : 32;
             dm.dmDisplayFixedOutput = Win32.DMDFO_DEFAULT;
 
             int ret = Win32.ChangeDisplaySettingsEx(_deviceName, ref dm, IntPtr.Zero,
                 Win32.CDS_UPDATEREGISTRY | Win32.CDS_NORESET, IntPtr.Zero);
             if (ret != Win32.DISP_CHANGE_SUCCESSFUL)
                 return $"خطا در بازیابی (کد {ret})";
-            Win32.ChangeDisplaySettingsEx(_deviceName, IntPtr.Zero, IntPtr.Zero, 0, IntPtr.Zero);
+            ret = Win32.ChangeDisplaySettingsEx(_deviceName, IntPtr.Zero, IntPtr.Zero, 0, IntPtr.Zero);
+            if (ret != Win32.DISP_CHANGE_SUCCESSFUL)
+                return $"خطا در اعمال بازیابی (کد {ret})";
             return null;
         }
 
@@ -180,12 +182,10 @@ namespace BlindSpot.Core
             if (reduced == null)
                 return "هیچ حالت نمایشی برای این حاشیه پیدا نشد. حاشیه را کمتر کنید.";
 
-            config.OriginalWidth = current.Width;
-            config.OriginalHeight = current.Height;
-            config.OriginalFrequency = current.Frequency;
-            config.LockedWidth = reduced.Width;
-            config.LockedHeight = reduced.Height;
-            config.Save();
+            // Snapshot into locals first and only touch the live config once the
+            // switch is verified. Mutating config up front means a later
+            // ApplyProtection() -> Save() would persist a lock that never happened.
+            int origW = current.Width, origH = current.Height, origHz = current.Frequency, origBpp = current.BitsPerPixel;
 
             string err = ApplyMode(reduced);
             if (err != null)
@@ -196,6 +196,13 @@ namespace BlindSpot.Core
             if (now.Width != reduced.Width || now.Height != reduced.Height)
                 return "تغییر اعمال شد ولی کارت گرافیک آن را نپذیرفت (احتمالاً نیاز به تنظیم Center در Intel Graphics Command Center است).";
 
+            config.OriginalWidth = origW;
+            config.OriginalHeight = origH;
+            config.OriginalFrequency = origHz;
+            config.OriginalBitsPerPixel = origBpp;
+            config.LockedWidth = reduced.Width;
+            config.LockedHeight = reduced.Height;
+            config.Save();
             return null;
         }
     }

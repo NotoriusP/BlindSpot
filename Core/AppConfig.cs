@@ -31,6 +31,7 @@ namespace BlindSpot.Core
         public int OriginalWidth { get; set; } = 0;
         public int OriginalHeight { get; set; } = 0;
         public int OriginalFrequency { get; set; } = 0;
+        public int OriginalBitsPerPixel { get; set; } = 0;
         public int LockedWidth { get; set; } = 0;
         public int LockedHeight { get; set; } = 0;
 
