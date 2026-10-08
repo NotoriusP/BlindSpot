@@ -11,8 +11,10 @@
 وقتی بخشی از مانیتورت سوخته یا پیکسل‌هایش مرده باشد (مثلاً ۱۶۰ پیکسل از لبهٔ چپ دیگر نور نمی‌دهد)، ویندوز همچنان به روال عادی خود ادامه می‌دهد و پنجره‌ها و آیکون‌ها را در آن قسمتِ معیوب قرار می‌دهد. BlindSpot این نوار آسیب‌دیده را «تصاحب» می‌کند و به ویندوز می‌فهماند که این محدوده دیگر قابل‌استفاده نیست.
 
 <p align="center">
-  <img src="UI/Asset/demo-desktop-small.png" alt="BlindSpot demo" width="640">
+  <img src="UI/Asset/demo-compare.gif" alt="BlindSpot قبل/بعد" width="640">
 </p>
+
+*سمت چپ: BlindSpot غیرفعال — یه پنجرهٔ تمام‌صفحه داخل نوار آسیب‌دیده رفته. سمت راست: BlindSpot فعال — همون پنجره به ناحیهٔ امن منتقل شده.*
 
 نوار سیاهِ سمت چپ، همان ناحیهٔ رزرو‌شده است: تسک‌بار و آیکن‌های دسکتاپ از آنجا شروع نمی‌شوند.
 
@@ -64,8 +66,10 @@
 When a strip of your monitor is dead (say the leftmost 160px no longer lights up), Windows still places icons and windows there. BlindSpot claims that strip and says "this area belongs to nobody".
 
 <p align="center">
-  <img src="UI/Asset/demo-desktop-small.png" alt="BlindSpot in action" width="640">
+  <img src="UI/Asset/demo-compare.gif" alt="BlindSpot before/after comparison" width="640">
 </p>
+
+*Left: BlindSpot paused — a maximised window strays into the dead band. Right: BlindSpot running — the same window is clamped to the safe zone.*
 
 The black band on the left is the reserved zone: the taskbar and desktop icons start after it.
 
