@@ -1,8 +1,6 @@
 BlindSpot
-<p align=“center”>
-
-<img src=“UI/Asset/Logo.png” alt=“BlindSpot” width=“256”>
-
+<p align="center">
+  <img src="UI/Asset/Logo.png" alt="BlindSpot" width="256">
 </p>
 
 ناحیهٔ امن برای مانیتورهای آسیب‌دیده — A safe zone for a damaged monitor
